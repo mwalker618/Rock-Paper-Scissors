@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WalkerMegan_RockPaperScissors</title>
+
+<script type="application/javascript">
+var img, btn;
+var name;
+var input;
+var flag = 0;
+var boxWord;
+
+//Narrative
+var A = "you walk into a building. There is a door, you walk in and it locks behind you. There are three items on the table, a rock, a piece of paper and a pair of scissors. Which do you pick up?";
+var B = "You pick up the pair of scissors.  On the wall in front of you there are two wires, one is red and one is blue. Which do you cut?";
+var B1 = "You cut the red wire. The power goes out. You hear a door open. You feel around the room, until you find the  door you entered open.  You crawl your way to the entrance of the building and  leave like  this never happened.";
+var B2 = "You cut the blue wire. The power goes out. You hear a door open and something shuffling into the room. You sneak around feeling the wall until the shuffling comes towards you. Something starts eating your face and you die.";
+var C = "You pick up the rock.  Do you smash open the old door you came from or the new door in front of you?";
+var C1 = "The door opens and you leave the way you came in like nothing ever happened. ";
+var C2 = "The door opens and a zombie starts to shuffle in. You can smash open the old door you came from or smash the zombie, which do you choose?";
+var C3 = "The door opens and you leave the way you came in, but so does the zombie. You make it home like nothing ever happened. Meanwhile, the zombie beings on the end of the world.";
+var C4 = "You knock the zombie down but it grabs your legs and starts to eat them. You then start turning into a zombie. ";
+var D = "You pick up the piece of paper. You see a code written on it.  There are keypads by both doors in the room. Do you enter the code at the old door you came from or the new door in front of you?";
+var D1 = "The building goes into lock-down. You are stuck in the building until you die of dehydration.";
+var D2 = "The door opens and a zombie starts to shuffle into the room. You have time to grab another item. What do you pick up?";
+var D3 = "You pick up the scissors and stab the zombie through the eye, hitting the brain. It falls down immobile. There is a door at the other side of the new room with a chained lock. You cut the chain and the door opens to an alley. You go home a hero. ";
+var D4 = "You pick up the rock and knock the zombie down but it grabs your legs and starts to eat them. You then start turning into a zombie. ";
+
+
+
+function game() {
+	img=document.getElementById('img');
+	input=document.getElementById('input').value;
+	if(flag==0){
+		name = input;
+		texter("Hello "+name+" "+A);	
+		flag = 1;
+	} else if(flag==1 && readable(input)=="scissors"){
+		texter(B);
+		flag = 2;	
+
+	} else if(flag==2 && readable(input)=="red"){
+		texter(B1);
+		flag = 7;
+		img.src="b1.jpg";	
+	} else if(flag==2 && readable(input)=="blue"){
+		texter(B2);
+		flag = 7;
+		img.src="b2.jpg";	
+	} else if(flag==1 && readable(input)=="rock"){
+		texter(C);
+		flag = 3;
+			
+	} else if(flag==3 && readable(input)=="old"){
+		texter(C1);
+		flag = 7;
+		img.src="c1.jpg";	
+	} else if(flag==3 && readable(input)=="new"){
+		texter(C2);
+		flag = 4;
+		img.src="c2.jpg";	
+	} else if(flag===4 && readable(input)=="door"){
+		texter(C3);
+		flag = 7;
+		img.src="c3.jpg";	
+	} else if(flag==4 && readable(input)=="zombie"){
+		texter(C4);
+		flag = 7;
+		img.src="c4.jpg";	
+	} else if(flag==1 && readable(input)=="paper"){
+		texter(D);
+		flag = 5;
+		img.src="d.jpg";	
+	} else if(flag==5 && readable(input)=="old"){
+		texter(D1);
+		flag = 7;
+		img.src="d1.jpg";	
+	} else if(flag==5 && readable(input)=="new"){
+		texter(D2);
+		flag=6;	
+		img.src="d2.jpg";
+	} else if(flag==6 && readable(input)=="scissors"){
+		texter(D3);
+		flag = 7;
+		img.src="d3.jpg";	
+	} else if(flag==6 && readable(input)=="rock"){
+		texter(D4);
+		flag = 7;
+		img.src="d4.jpg";	
+	} else if(readable(input)=="restart"){
+		output.innerHTML="";	
+		flag=0;
+		img.src="a.jpg";
+	} else{
+		texter("try again");
+	}
+	
+	clearMe(document.getElementById('input'));
+	reBuild(document.getElementById('input'),boxType());
+}
+
+function texter(newText){
+	console.log("texter");
+	var oldText = document.getElementById('output').innerHTML;
+	document.getElementById('output').innerHTML=newText+" <br ><br >"+oldText;
+}
+
+function clearMe(element){
+	element.value="";	
+}
+
+function readable(string){
+	console.log(string);
+	string = string.toLowerCase();	
+	console.log("changed to "+string);
+	return string;
+}
+
+function boxType(){
+	if(flag==0){
+		boxWord = "enter a name"
+	} else if(flag==1){
+		boxWord = "type ROCK PAPER or SCISSORS"	
+	} else if(flag==2){
+		boxWord = "type RED or BLUE"	
+	} else if(flag==3){
+		boxWord = "type OLD or NEW"	
+	} else if(flag==4){
+		boxWord = "type DOOR or ZOMBIE"
+	} else if(flag==5){
+		boxWord = "type OLD or NEW"	
+	} else if(flag==6){
+		boxWord = "type ROCK or SCISSORS"	
+	} else if(flag==7){
+		boxWord = "type RESTART"	
+	}
+	return boxWord;
+}
+
+function reBuild(element,words){
+	if(element.value==""){
+		element.value=words;	
+	}
+}
+</script>
+<style type="text/css">
+#everything {
+	border:thick solid black;
+	width: auto;	
+	background-image:url(everything.jpg);
+	padding:20px;
+	display:inline-block;
+	margin-top:50px;
+}
+#para {
+	border:thin solid black;
+	width:300px;
+	height:450px;	
+	padding:20px;
+	margin-right:10px;
+	background-image:url(para.jpg);
+	float:left;
+}
+#image{
+	margin-bottom:25px;
+}
+#submit{
+	margin-left:125px;	
+}
+#right{
+	display:block;	
+	float:right;
+	margin-left:10px;
+}
+body {
+	background-image:url(background.jpg);
+}
+</style>
+</head>
+
+<body>
+
+<center>
+<div id="everything">
+<div id="title"><h1>Rock, Paper, Scissors</h1></div>
+<div id="para"><p id="output"></p></div>
+<div id="right">
+<div id="image"><img id="img" src="a.jpg"><br /></div>
+<div id="submit">
+<input type="text" value="enter name here" id="input" onblur="reBuild(this,boxType())" onfocus="clearMe(this)" size="43">
+<input id="btn" type="button" value="Next" onclick="game()" >
+</div>
+</div>
+</div>
+</center>
+</body>
+</html>
